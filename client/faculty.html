@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Faculty - ERP</title>
+  <link rel="stylesheet" href="attendance.css" />
+  <style>
+    body {
+      background-color: #021027;
+      margin: 0;
+      padding: 30px;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: rgb(222, 222, 222);
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      padding: 10px 30px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-buttons a {
+      padding: 10px 16px;
+      background-color: #bbb;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    .nav-buttons a:hover {
+      background-color: #888;
+      color: white;
+    }
+
+    .profile-icon img {
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #ddd;
+    }
+
+    h1 {
+      text-align: center;
+      color: #003c7c;
+      margin-bottom: 20px;
+    }
+
+    .faculty-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+
+    .faculty-table th,
+    .faculty-table td {
+      border: 1px solid #000;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .faculty-table th {
+      background-color: #003c7c;
+      color: white;
+    }
+
+    .faculty-table tr:nth-child(even) {
+      background-color: #f3f3f3;
+    }
+
+    .faculty-table td a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .faculty-table td a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <img src="1.jpeg" alt="Christ University Logo" class="logo" />
+
+    <div class="nav-right">
+      <div class="nav-buttons">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="academics.html">Academics</a>
+        <a href="attendances.html">Attendance</a>
+        <a href="labs.html">Labs</a>
+        <a href="project.html">Projects</a>
+        <a href="faculty.html">Faculty</a>
+      </div>
+      <div class="profile-icon">
+  <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="Profile" onclick="toggleProfile()" />
+</div>
+
+    </div>
+    <div class="profile-dropdown" id="profileDropdown">
+  <p><strong>Name:</strong> Joan J</p>
+  <p><strong>Class:</strong> 5 BTCS A</p>
+  <p><strong>Reg No:</strong> 2360812</p>
+</div>
+
+  </div>
+
+  <div class="container">
+    <h1>Faculty Information</h1>
+
+    <table class="faculty-table">
+      <thead>
+        <tr>
+          <th>Sl No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+          <th>Campus</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Dr. Aruna SK</a></td>
+          <td>aruna.btech@christuniversity.in</td>
+          <td>AIML</td>
+          <td>KENGERI</td>
+          <td>Block 2, Room 210</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Dr. Jyothi Mandala</a></td>
+          <td>jyothi.btech@christuniversity.in</td>
+          <td>CS CORE</td>
+          <td>KENGERI</td>
+          <td>Block 3, Room 110</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Dr. Jenefa MS</a></td>
+          <td>jenefa.btech@christuniversity.in</td>
+          <td>CS CORE</td>
+          <td>KENGERI</td>
+          <td>Block 3, Room 100</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Prof. Arul SV</a></td>
+          <td>arul.btech@christuniversity.in</td>
+          <td>CS CORE</td>
+          <td>KENGERI</td>
+          <td>Block 5, Room 660</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Prof. Smitha Joshi</a></td>
+          <td>smitha.btech@christuniversity.in</td>
+          <td>AIML</td>
+          <td>KENGERI</td>
+          <td>Block 2, Room 200</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Dr. Jiya Reeba Ajit</a></td>
+          <td>jiya.btech@christuniversity.in</td>
+          <td>AIML</td>
+          <td>KENGERI</td>
+          <td>Block 2, Room 210</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<script>
+  function toggleProfile() {
+    const dropdown = document.getElementById("profileDropdown");
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  }
+
+  window.addEventListener('click', function(e) {
+    const profile = document.querySelector('.profile-icon');
+    const dropdown = document.getElementById("profileDropdown");
+    if (!profile.contains(e.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
+</script>
+
+
+<script>
+  window.addEventListener('DOMContentLoaded', async () => {
+    const tbody = document.querySelector('.faculty-table tbody');
+    
+    try {
+      const response = await fetch('http://localhost:5000/api/faculty');
+      const facultyList = await response.json();
+
+      tbody.innerHTML = ''; // Clear existing static rows
+
+      facultyList.forEach((faculty, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${faculty.name}</td>
+          <td>${faculty.email}</td>
+          <td>${faculty.department}</td>
+          <td>${faculty.campus}</td>
+          <td>${faculty.location}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    } catch (error) {
+      console.error('Failed to load faculty data:', error);
+      tbody.innerHTML = '<tr><td colspan="6">Could not load data. Please try again later.</td></tr>';
+    }
+  });
+</script>
+</body>
+</html>

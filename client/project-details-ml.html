@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ML Healthcare Project</title>
+  <link rel="stylesheet" href="attendance.css" />
+  <style>
+    body {
+      background-color: #021027;
+      margin: 0;
+      padding: 30px;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: rgb(222, 222, 222);
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      padding: 10px 30px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-buttons a {
+      padding: 10px 16px;
+      background-color: #bbb;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    .nav-buttons a:hover {
+      background-color: #888;
+      color: white;
+    }
+
+    .profile-icon img {
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #ddd;
+    }
+
+    h1 {
+      text-align: center;
+      color: #003c7c;
+      margin-bottom: 20px;
+    }
+
+    h2, h3 {
+      color: #003c7c;
+      margin-top: 20px;
+    }
+
+    .status {
+      padding: 6px 12px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .status.ongoing {
+      background-color: #f0ad4e;
+    }
+
+    .status.completed {
+      background-color: #5cb85c;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    a.view-link {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    a.view-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+    <div class="navbar">
+    <img src="1.jpeg" alt="Christ University Logo" class="logo" />
+
+    <div class="nav-right">
+      <div class="nav-buttons">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="academics.html">Academics</a>
+        <a href="attendances.html">Attendance</a>
+        <a href="labs.html">Labs</a>
+        <a href="project.html">Projects</a>
+        <a href="faculty.html">Faculty</a>
+      </div>
+      <div class="profile-icon">
+        <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="Profile" />
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h1 style="text-align:center; color:#003c7c;">Project: ML Healthcare</h1>
+    
+    <section class="project-detail-section">
+      <h2>Machine Learning for Disease Prediction</h2>
+      <p><strong>Status:</strong> <span class="status completed">Completed</span></p>
+
+      <h3>Description</h3>
+      <p>This project uses machine learning models to predict early signs of chronic diseases like diabetes and heart conditions based on medical history and lab test data.</p>
+
+      <h3>Team Members</h3>
+      <ul>
+        <li>Riya – Data Preprocessing</li>
+        <li>Sarvvesh – Model Training</li>
+        <li>Neha – UI & Integration</li>
+      </ul>
+
+      <h3>Technologies</h3>
+      <ul>
+        <li>Python (scikit-learn, Pandas)</li>
+        <li>Flask, HTML/CSS</li>
+        <li>Google Colab for model training</li>
+      </ul>
+
+      <h3>Guide</h3>
+      <p>Dr. Manohar<br>Email: manohar@college.edu</p>
+
+      <a href="project.html" class="view-link">&larr; Back to Projects</a>
+    </section>
+  </div>
+</body>
+</html>

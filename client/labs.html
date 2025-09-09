@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Labs - ERP</title>
+  <link rel="stylesheet" href="attendance.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #021027;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      padding: 10px 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    
+    .logo {
+      height: 60px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+  
+    .profile-icon img {
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 40px auto;
+      background: #dedede;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #003c7c;
+      margin-bottom: 10px;
+    }
+
+    p.description {
+      text-align: center;
+      color: #444;
+      margin-bottom: 30px;
+    }
+
+    .filter-controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .filter-controls input {
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1px solid #aaa;
+      width: 200px;
+      margin-right: 10px;
+    }
+
+    .filter-controls button {
+      background-color: #003c7c;
+      color: white;
+      padding: 8px 14px;
+      border: none;
+      margin: 0 5px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .filter-controls button:hover {
+      background-color: #002a59;
+    }
+
+    .flexboard {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .lab-card {
+      background: #f3f3f3;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .lab-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .lab-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .lab-info {
+      padding: 20px;
+    }
+
+    .lab-info h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #003c7c;
+    }
+
+    .lab-info p {
+      margin: 6px 0;
+      color: #333;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 10px;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    .status.ongoing {
+      background-color: #d1f5e0;
+      color: #267a3e;
+    }
+
+    .status.completed {
+      background-color: #d0e0f7;
+      color: #004a99;
+    }
+
+    .download-btn {
+      margin-top: 12px;
+      display: inline-block;
+      background-color: #003c7c;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      transition: background 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background-color: #002a59;
+    }
+
+    progress {
+      width: 100%;
+      height: 8px;
+      margin-top: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .lab-card {
+        width: 100%;
+      }
+
+      .container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <img src="1.jpeg" alt="Christ University Logo" class="logo" />
+    <div class="nav-buttons">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="academics.html">Academics</a>
+      <a href="attendances.html">Attendance</a>
+      <a href="labs.html">Labs</a>
+      <a href="project.html">Projects</a>
+      <a href="faculty.html">Faculty</a>
+    </div>
+    <div class="profile-icon">
+      <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="Profile" />
+    </div>
+  </div>
+  </div>
+    <div class="profile-dropdown" id="profileDropdown">
+  <p><strong>Name:</strong> Joan J</p>
+  <p><strong>Class:</strong> 5 BTCS A</p>
+  <p><strong>Reg No:</strong> 2360812</p>
+</div>
+
+
+  <div class="container">
+    <h1>Lab Dashboard</h1>
+    <p class="description">Track your lab sessions, instructors, timings, and materials.</p>
+
+    <div class="filter-controls">
+      <input type="text" id="searchInput" onkeyup="searchLabs()" placeholder="Search labs...">
+      <button onclick="filterLabs('all')">All</button>
+      <button onclick="filterLabs('ongoing')">Ongoing</button>
+      <button onclick="filterLabs('completed')">Completed</button>
+    </div>
+
+    <div class="flexboard" id="labBoard">
+    
+      <div class="lab-card">
+        <img src="lab1.jpeg" alt="Data Structures Lab">
+        <div class="lab-info">
+          <h3>Data Structures Lab</h3>
+          <p><strong>Instructor:</strong> Dr. Sharma</p>
+          <p><strong>Schedule:</strong> Mon & Wed - 10 AM</p>
+          <span class="status ongoing">Ongoing</span>
+          <progress value="70" max="100"></progress>
+          
+        </div>
+      </div>
+
+      <!-- Lab 2 -->
+      <div class="lab-card">
+        <img src="lab2.jpeg" alt="Database Lab">
+        <div class="lab-info">
+          <h3>Database Systems Lab</h3>
+          <p><strong>Instructor:</strong> Ms. Rani</p>
+          <p><strong>Schedule:</strong> Tue & Thu - 2 PM</p>
+          <span class="status completed">Completed</span>
+          <progress value="100" max="100"></progress>
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function filterLabs(status) {
+      const cards = document.querySelectorAll('.lab-card');
+      cards.forEach(card => {
+        const tag = card.querySelector('.status');
+        if (status === 'all' || tag.classList.contains(status)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+
+    function searchLabs() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.lab-card');
+      cards.forEach(card => {
+        const name = card.querySelector('h3').textContent.toLowerCase();
+        card.style.display = name.includes(input) ? "block" : "none";
+      });
+    }
+    
+  </script>
+  
+  <script src="attendance.js"></script>
+  <script>
+  function toggleProfile() {
+    const dropdown = document.getElementById("profileDropdown");
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  }
+
+  window.addEventListener('click', function(e) {
+    const profile = document.querySelector('.profile-icon');
+    const dropdown = document.getElementById("profileDropdown");
+    if (!profile.contains(e.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
+</script>
+</body>
+</html>

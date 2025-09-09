@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <img src="c:\Users\91636\OneDrive\画像\Screenshots\Screenshot 2025-06-23 102338.png" alt="Left Side" class="side-image left" />
+
+    <div class="login-container">
+      <h2>Welcome Christite!</h2>
+      <form id="loginForm">
+        <input type="text" placeholder="Username" id="username" required />
+<input type="password" placeholder="Password" id="password" required />
+
+        <div class="captcha-section">
+          <span id="captchaDisplay"></span>
+          <button type="button" onclick="generateCaptcha()" class="refresh-btn">⟳</button>
+        </div>
+        <input type="text" placeholder="Enter Captcha" id="captchaInput" required />
+        <button type="submit">Login</button>
+      </form>
+      <p id="error-message"></p>
+    </div>
+
+    <img src="c:\Users\91636\OneDrive\画像\Screenshots\Screenshot 2025-07-06 215354.png" alt="Right Side" class="side-image right" />
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

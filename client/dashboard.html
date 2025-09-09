@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="attendance.css" />
+  <style>
+    body {
+      background-color: #021027;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      padding: 10px 30px;
+      border-bottom: 1px solid #ccc;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-buttons a {
+      padding: 10px 16px;
+      background-color: #bbb;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    .nav-buttons a:hover {
+      background-color: #888;
+      color: white;
+    }
+
+    .profile-icon img {
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #ddd;
+    }
+
+    .banner {
+      position: relative;
+      background: url('2.png') no-repeat center center/cover;
+      height: 450px;
+      width: 100%;
+    }
+    
+
+    .message-box {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      max-width: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      flex-direction: row;
+    }
+
+    .arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background-color: rgba(255,255,255,0.8);
+      color: #333;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-weight: bold;
+      user-select: none;
+    }
+
+    .arrow:hover {
+      background-color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .message {
+      display: none;
+      font-size: 35px;
+      text-align: center;
+    }
+
+    .message.active {
+      display: block;
+    }
+
+    .dot-container {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      display: inline-block;
+      height: 10px;
+      width: 10px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      transition: background-color 0.3s;
+    }
+
+    .dot.active {
+      background-color: white;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: rgb(222, 222, 222);
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #003c7c;
+      margin-bottom: 30px;
+    }
+
+    .dashboard-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      font-weight: bold;
+      color: #333;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+
+  <div class="navbar">
+    <img src="1.jpeg" alt="Christ University Logo" class="logo" />
+    <div class="nav-right">
+      <div class="nav-buttons">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="academics.html">Academics</a>
+        <a href="attendances.html">Attendance</a>
+        <a href="labs.html">Labs</a>
+        <a href="project.html">Projects</a>
+        <a href="faculty.html">Faculty</a>
+      </div>
+      <div class="profile-icon">
+  <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="Profile" onclick="toggleProfile()" />
+  <div class="profile-dropdown" id="profileDropdown">
+  <p><strong>Name:</strong> Joan J</p>
+  <p><strong>Class:</strong> 5 BTCS A</p>
+  <p><strong>Reg No:</strong> 2360812</p>
+</div>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="banner">
+    <div class="message-box">
+  <div class="arrow" onclick="prevMessage()">&#9664;</div>
+  <div class="message-container">
+    <div class="message active"><b>UG</b> and <b>PG</b> <br>applications open (DELHI NCR campus)</div>
+    <div class="message">Times Higher Education <br>Impact Ranking 2025</div>
+    <div class="message"><b>REGISTER NOW: </b><br>CHRIST University Online Programmes</div>
+    <div class="dot-container">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+  <div class="arrow" onclick="nextMessage()">&#9654;</div>
+</div>
+
+  </div>
+
+
+
+<div class="announcements-and-previews">
+
+  <div class="announcements-section">
+    <div class="announcements-header">
+      <h1> <b>Announcements</b></h1>
+    </div>
+    <ul class="announcements-list">
+      <li>
+        <span class="announcement-icon"></span>
+        <div class="announcement-content">
+          <p class="title">Assignment 3 deadline</p>
+          <p class="detail">Submit by <strong>tomorrow (11:59 PM)</strong></p>
+        </div>
+      </li>
+      <li>
+        <span class="announcement-icon"></span>
+        <div class="announcement-content">
+          <p class="title">Midsemester Examinations</p>
+          <p class="detail">Scheduled to begin <strong>next week</strong></p>
+        </div>
+      </li>
+      <li>
+        <span class="announcement-icon"></span>
+        <div class="announcement-content">
+          <p class="title">Internship Mentor Meeting</p>
+          <p class="detail">July 10 at <strong>11:00 AM</strong> (Seminar Hall)</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Module Preview Cards -->
+  <div class="module-preview vertical">
+    <div class="preview-card">
+      <h3>Attendance Status</h3>
+      <div class="radial-progress" data-label="92%">
+        <svg viewBox="0 0 36 36">
+          <path class="circle-bg"
+                d="M18 2.0845
+                   a 15.9155 15.9155 0 0 1 0 31.831
+                   a 15.9155 15.9155 0 0 1 0 -31.831" />
+          <path class="circle"
+                stroke-dasharray="92, 100"
+                d="M18 2.0845
+                   a 15.9155 15.9155 0 0 1 0 31.831
+                   a 15.9155 15.9155 0 0 1 0 -31.831" />
+        </svg>
+        <div class="radial-label">91.46%</div>
+      </div>
+      <p>You're attending regularly.</p>
+    </div>
+
+    <div class="preview-card">
+      <h3>Project Completion</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 62.5%;">2 / 3</div>
+      </div>
+      <p>Keep up the progress!</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  <div class="image-strip">
+    <img src="3.png" alt="Image 3">
+    <img src="4.png" alt="Image 4">
+    <img src="5.png" alt="Image 5">
+    <img src="6.png" alt="Image 6">
+    <img src="7.png" alt="Image 7">
+  </div>
+
+
+
+
+
+
+  <script>
+    const messages = document.querySelectorAll('.message');
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+
+    function showMessage(index) {
+      messages.forEach((msg, i) => {
+        msg.classList.toggle('active', i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextMessage() {
+      currentIndex = (currentIndex + 1) % messages.length;
+      showMessage(currentIndex);
+    }
+
+    function prevMessage() {
+      currentIndex = (currentIndex - 1 + messages.length) % messages.length;
+      showMessage(currentIndex);
+    }
+
+    setInterval(nextMessage, 5000); 
+  </script>
+
+<div class="footer-banner">
+  <img src="8.png" alt="Footer Banner">
+</div>
+<script>
+  function toggleProfile() {
+    const dropdown = document.getElementById("profileDropdown");
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  }
+
+
+  window.addEventListener('click', function(e) {
+    const profile = document.querySelector('.profile-icon');
+    const dropdown = document.getElementById("profileDropdown");
+    if (!profile.contains(e.target)) {
+      dropdown.style.display = 'none';
+    }
+  });
+</script>
+
+
+</body>
+</html>
