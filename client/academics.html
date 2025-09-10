@@ -186,7 +186,7 @@
     const tbody = document.querySelector('.academic-table tbody');
     
     try {
-      const response = await fetch('http://localhost:5000/api/academics');
+      const response = await fetch('/api/academics');
       const courses = await response.json();
 
       tbody.innerHTML = ''; // Clear any existing static rows

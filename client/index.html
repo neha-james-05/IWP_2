@@ -3,31 +3,100 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
+  <title>Christ University ERP - Login</title>
   <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
   <div class="login-wrapper">
-    <img src="c:\Users\91636\OneDrive\画像\Screenshots\Screenshot 2025-06-23 102338.png" alt="Left Side" class="side-image left" />
-
-    <div class="login-container">
-      <h2>Welcome Christite!</h2>
-      <form id="loginForm">
-        <input type="text" placeholder="Username" id="username" required />
-<input type="password" placeholder="Password" id="password" required />
-
-        <div class="captcha-section">
-          <span id="captchaDisplay"></span>
-          <button type="button" onclick="generateCaptcha()" class="refresh-btn">⟳</button>
+    <div class="side-panel left-panel">
+      <div class="panel-content">
+        <div class="university-info">
+          <h1>Christ University</h1>
+          <p>Excellence and Service</p>
+          <div class="features">
+            <div class="feature">
+              <i class="fas fa-graduation-cap"></i>
+              <span>Quality Education</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-users"></i>
+              <span>Diverse Community</span>
+            </div>
+            <div class="feature">
+              <i class="fas fa-globe"></i>
+              <span>Global Perspective</span>
+            </div>
+          </div>
         </div>
-        <input type="text" placeholder="Enter Captcha" id="captchaInput" required />
-        <button type="submit">Login</button>
-      </form>
-      <p id="error-message"></p>
+      </div>
     </div>
 
-    <img src="c:\Users\91636\OneDrive\画像\Screenshots\Screenshot 2025-07-06 215354.png" alt="Right Side" class="side-image right" />
+    <div class="login-container">
+      <div class="login-header">
+        <div class="logo">
+          <i class="fas fa-university"></i>
+        </div>
+        <h2>Welcome Back, Christite!</h2>
+        <p>Sign in to access your dashboard</p>
+      </div>
+      
+      <form id="loginForm" class="login-form">
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" placeholder="Username" id="username" required />
+        </div>
+        
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" placeholder="Password" id="password" required />
+        </div>
+
+        <div class="captcha-section">
+          <div class="captcha-display">
+            <span id="captchaDisplay"></span>
+            <button type="button" onclick="generateCaptcha()" class="refresh-btn">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-shield-alt"></i>
+            <input type="text" placeholder="Enter Captcha" id="captchaInput" required />
+          </div>
+        </div>
+        
+        <button type="submit" class="login-btn">
+          <span>Sign In</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </form>
+      
+      <div id="error-message" class="error-message"></div>
+      
+      <div class="login-footer">
+        <p>Need help? <a href="#">Contact Support</a></p>
+      </div>
+    </div>
+
+    <div class="side-panel right-panel">
+      <div class="panel-content">
+        <div class="stats">
+          <div class="stat">
+            <h3>50+</h3>
+            <p>Programs</p>
+          </div>
+          <div class="stat">
+            <h3>25,000+</h3>
+            <p>Students</p>
+          </div>
+          <div class="stat">
+            <h3>1,500+</h3>
+            <p>Faculty</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>

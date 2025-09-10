@@ -24,7 +24,7 @@ router.post('/login', async (req, res) => {
 
     jwt.sign(
       payload,
-      process.env.JWT_SECRET, // A secret key you'll create
+      process.env.JWT_SECRET || 'your_jwt_secret_key_here_change_this_in_production', // Fallback secret
       { expiresIn: 3600 }, // Token expires in 1 hour
       (err, token) => {
         if (err) throw err;

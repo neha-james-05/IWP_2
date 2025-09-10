@@ -3,302 +3,649 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="attendance.css" />
+  <title>Christ University ERP - Dashboard</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
-    body {
-      background-color: #021027;
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      overflow-x: hidden;
+    :root {
+      --primary: #1a4f8c;
+      --primary-dark: #0d3b6c;
+      --secondary: #d4af37;
+      --accent: #e63946;
+      --success: #2a9d8f;
+      --warning: #e9c46a;
+      --danger: #e76f51;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --gray-100: #f8f9fa;
+      --gray-200: #e9ecef;
+      --gray-300: #dee2e6;
+      --gray-400: #ced4da;
+      --gray-500: #adb5bd;
+      --gray-600: #6c757d;
+      --gray-700: #495057;
+      --gray-800: #343a40;
+      --gray-900: #212529;
+      --border-radius: 12px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+      --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      --transition: all 0.3s ease;
     }
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f5f7fa;
+      color: var(--gray-800);
+      line-height: 1.6;
+    }
+
+    /* Improved Navbar */
     .navbar {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 0.75rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow-md);
+    }
+
+    .navbar-content {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      background: white;
-      padding: 10px 30px;
-      border-bottom: 1px solid #ccc;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
     }
 
     .logo {
-      height: 50px;
+      height: 45px;
+      border-radius: 4px;
     }
 
     .nav-right {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 1.5rem;
     }
 
     .nav-buttons {
       display: flex;
-      gap: 15px;
+      gap: 0.5rem;
     }
 
     .nav-buttons a {
-      padding: 10px 16px;
-      background-color: #bbb;
-      border-radius: 20px;
+      color: rgba(255, 255, 255, 0.85);
       text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-      transition: background 0.3s;
+      padding: 0.6rem 1rem;
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      transition: var(--transition);
     }
 
     .nav-buttons a:hover {
-      background-color: #888;
+      background-color: rgba(255, 255, 255, 0.1);
       color: white;
+    }
+
+    .nav-buttons a.active {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+
+    .profile-icon {
+      position: relative;
+      cursor: pointer;
     }
 
     .profile-icon img {
+      width: 40px;
       height: 40px;
       border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid #ddd;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      transition: var(--transition);
     }
 
-    .banner {
-      position: relative;
-      background: url('2.png') no-repeat center center/cover;
-      height: 450px;
-      width: 100%;
+    .profile-icon:hover img {
+      border-color: white;
+      transform: scale(1.05);
     }
-    
 
-    .message-box {
+    .profile-dropdown {
+      display: none;
       position: absolute;
-      top: 50%;
-      right: 30px;
-      transform: translateY(-50%);
-      background-color: rgba(0,0,0,0.6);
-      color: white;
-      padding: 20px 30px;
-      border-radius: 10px;
-      max-width: 500px;
+      right: 0;
+      top: 50px;
+      background: white;
+      width: 250px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-lg);
+      padding: 1.25rem;
+      z-index: 1001;
+      color: var(--gray-700);
+    }
+
+    .profile-dropdown p {
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .profile-dropdown strong {
+      color: var(--gray-900);
+    }
+
+    .profile-dropdown hr {
+      margin: 1rem 0;
+      border: none;
+      border-top: 1px solid var(--gray-300);
+    }
+
+    .profile-dropdown a {
+      color: var(--danger);
+      text-decoration: none;
+      font-weight: 500;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 15px;
-      flex-direction: row;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .profile-dropdown a:hover {
+      color: #c53030;
+    }
+
+    /* Main Content */
+    .main-content {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Banner with messages */
+    .banner {
+      background: linear-gradient(to right, #667eea, #764ba2);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .message-box {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      color: white;
     }
 
     .arrow {
+      padding: 0.75rem;
+      cursor: pointer;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
-      height: 30px;
-      background-color: rgba(255,255,255,0.8);
-      color: #333;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background 0.3s;
-      font-weight: bold;
-      user-select: none;
+      transition: var(--transition);
     }
 
     .arrow:hover {
-      background-color: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .message-container {
+      flex: 1;
+      text-align: center;
+      position: relative;
     }
 
     .message {
       display: none;
-      font-size: 35px;
-      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 500;
     }
 
     .message.active {
       display: block;
+      animation: fadeIn 0.5s ease;
     }
 
     .dot-container {
-      text-align: center;
-      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
     }
 
     .dot {
-      display: inline-block;
-      height: 10px;
-      width: 10px;
-      margin: 0 5px;
-      background-color: #bbb;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      transition: background-color 0.3s;
+      background-color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: var(--transition);
     }
 
     .dot.active {
       background-color: white;
+      transform: scale(1.2);
     }
 
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      background: rgb(222, 222, 222);
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    h1 {
-      text-align: center;
-      color: #003c7c;
-      margin-bottom: 30px;
-    }
-
-    .dashboard-cards {
+    /* Announcements and Previews */
+    .announcements-and-previews {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
+      grid-template-columns: 1fr 320px;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
     }
 
-    .card {
-      background-color: white;
+    .announcements-section {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .announcements-header {
+      background: linear-gradient(to right, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 1.25rem;
+    }
+
+    .announcements-header h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .announcements-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .announcements-list li {
+      display: flex;
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--gray-200);
+      transition: var(--transition);
+    }
+
+    .announcements-list li:hover {
+      background-color: var(--gray-100);
+    }
+
+    .announcements-list li:last-child {
+      border-bottom: none;
+    }
+
+    .announcement-icon {
+      width: 40px;
+      height: 40px;
       border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      font-weight: bold;
-      color: #333;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
+      background-color: rgba(26, 79, 140, 0.1);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      flex-shrink: 0;
     }
 
-    .card:hover {
-      transform: scale(1.05);
+    .announcement-content .title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--gray-900);
+    }
+
+    .announcement-content .detail {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+    }
+
+    /* Module Preview Cards */
+    .module-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .preview-card {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .preview-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .preview-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--gray-800);
+      font-weight: 600;
+    }
+
+    .radial-progress {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1rem;
+    }
+
+    .radial-progress svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .circle-bg {
+      fill: none;
+      stroke: var(--gray-200);
+      stroke-width: 3.8;
+    }
+
+    .circle {
+      fill: none;
+      stroke-width: 3.8;
+      stroke-linecap: round;
+      stroke: url(#gradient);
+      transition: stroke-dasharray 0.8s ease;
+    }
+
+    .radial-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .progress-bar {
+      height: 12px;
+      background-color: var(--gray-200);
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--success), #28b487);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 8px;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 600;
+      transition: width 0.8s ease;
+    }
+
+    .preview-card p {
+      text-align: center;
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* Image Strip */
+    .image-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .image-strip img {
+      width: 100%;
+      height: 150px;
+      border-radius: var(--border-radius);
+      object-fit: cover;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .image-strip img:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Footer Banner */
+    .footer-banner {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .footer-banner img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .announcements-and-previews {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-buttons {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .image-strip {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .navbar-content {
+        padding: 0 1rem;
+      }
+      
+      .main-content {
+        padding: 0 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .image-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .message-box {
+        padding: 0.75rem;
+      }
+      
+      .message {
+        font-size: 0.9rem;
+      }
+      
+      .announcements-list li {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-
-
   <div class="navbar">
-    <img src="1.jpeg" alt="Christ University Logo" class="logo" />
-    <div class="nav-right">
-      <div class="nav-buttons">
-        <a href="dashboard.html">Dashboard</a>
-        <a href="academics.html">Academics</a>
-        <a href="attendances.html">Attendance</a>
-        <a href="labs.html">Labs</a>
-        <a href="project.html">Projects</a>
-        <a href="faculty.html">Faculty</a>
-      </div>
-      <div class="profile-icon">
-  <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="Profile" onclick="toggleProfile()" />
-  <div class="profile-dropdown" id="profileDropdown">
-  <p><strong>Name:</strong> Joan J</p>
-  <p><strong>Class:</strong> 5 BTCS A</p>
-  <p><strong>Reg No:</strong> 2360812</p>
-</div>
-
-</div>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="banner">
-    <div class="message-box">
-  <div class="arrow" onclick="prevMessage()">&#9664;</div>
-  <div class="message-container">
-    <div class="message active"><b>UG</b> and <b>PG</b> <br>applications open (DELHI NCR campus)</div>
-    <div class="message">Times Higher Education <br>Impact Ranking 2025</div>
-    <div class="message"><b>REGISTER NOW: </b><br>CHRIST University Online Programmes</div>
-    <div class="dot-container">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-  </div>
-  <div class="arrow" onclick="nextMessage()">&#9654;</div>
-</div>
-
-  </div>
-
-
-
-<div class="announcements-and-previews">
-
-  <div class="announcements-section">
-    <div class="announcements-header">
-      <h1> <b>Announcements</b></h1>
-    </div>
-    <ul class="announcements-list">
-      <li>
-        <span class="announcement-icon"></span>
-        <div class="announcement-content">
-          <p class="title">Assignment 3 deadline</p>
-          <p class="detail">Submit by <strong>tomorrow (11:59 PM)</strong></p>
+    <div class="navbar-content">
+      <img src="1.jpeg" alt="Christ University Logo" class="logo" />
+      <div class="nav-right">
+        <div class="nav-buttons">
+          <a href="dashboard.html" class="active">
+            <i class="fas fa-home"></i>
+            Dashboard
+          </a>
+          <a href="academics.html">
+            <i class="fas fa-graduation-cap"></i>
+            Academics
+          </a>
+          <a href="attendances.html">
+            <i class="fas fa-calendar-check"></i>
+            Attendance
+          </a>
+          <a href="labs.html">
+            <i class="fas fa-flask"></i>
+            Labs
+          </a>
+          <a href="project.html">
+            <i class="fas fa-project-diagram"></i>
+            Projects
+          </a>
+          <a href="faculty.html">
+            <i class="fas fa-chalkboard-teacher"></i>
+            Faculty
+          </a>
         </div>
-      </li>
-      <li>
-        <span class="announcement-icon"></span>
-        <div class="announcement-content">
-          <p class="title">Midsemester Examinations</p>
-          <p class="detail">Scheduled to begin <strong>next week</strong></p>
+        <div class="profile-icon">
+          <img src="https://img.icons8.com/ios-filled/50/000000/user.png" alt="Profile" onclick="toggleProfile()" />
+          <div class="profile-dropdown" id="profileDropdown">
+            <p><strong>Name:</strong> Joan J</p>
+            <p><strong>Class:</strong> 5 BTCS A</p>
+            <p><strong>Reg No:</strong> 2360812</p>
+            <hr>
+            <a href="#" onclick="logout()">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </div>
         </div>
-      </li>
-      <li>
-        <span class="announcement-icon"></span>
-        <div class="announcement-content">
-          <p class="title">Internship Mentor Meeting</p>
-          <p class="detail">July 10 at <strong>11:00 AM</strong> (Seminar Hall)</p>
-        </div>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Module Preview Cards -->
-  <div class="module-preview vertical">
-    <div class="preview-card">
-      <h3>Attendance Status</h3>
-      <div class="radial-progress" data-label="92%">
-        <svg viewBox="0 0 36 36">
-          <path class="circle-bg"
-                d="M18 2.0845
-                   a 15.9155 15.9155 0 0 1 0 31.831
-                   a 15.9155 15.9155 0 0 1 0 -31.831" />
-          <path class="circle"
-                stroke-dasharray="92, 100"
-                d="M18 2.0845
-                   a 15.9155 15.9155 0 0 1 0 31.831
-                   a 15.9155 15.9155 0 0 1 0 -31.831" />
-        </svg>
-        <div class="radial-label">91.46%</div>
       </div>
-      <p>You're attending regularly.</p>
-    </div>
-
-    <div class="preview-card">
-      <h3>Project Completion</h3>
-      <div class="progress-bar">
-        <div class="progress-fill" style="width: 62.5%;">2 / 3</div>
-      </div>
-      <p>Keep up the progress!</p>
     </div>
   </div>
-</div>
 
+  <div class="main-content">
+    <div class="banner">
+      <div class="message-box">
+        <div class="arrow" onclick="prevMessage()">
+          <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="message-container">
+          <div class="message active">
+            <strong>UG</strong> and <strong>PG</strong> applications open (DELHI NCR campus)
+          </div>
+          <div class="message">
+            Times Higher Education Impact Ranking 2025
+          </div>
+          <div class="message">
+            <strong>REGISTER NOW:</strong> CHRIST University Online Programmes
+          </div>
+          <div class="dot-container">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+        <div class="arrow" onclick="nextMessage()">
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+    </div>
 
+    <div class="announcements-and-previews">
+      <div class="announcements-section">
+        <div class="announcements-header">
+          <h1>Announcements</h1>
+        </div>
+        <ul class="announcements-list">
+          <li>
+            <div class="announcement-icon">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="announcement-content">
+              <p class="title">Assignment 3 deadline</p>
+              <p class="detail">Submit by <strong>tomorrow (11:59 PM)</strong></p>
+            </div>
+          </li>
+          <li>
+            <div class="announcement-icon">
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+            <div class="announcement-content">
+              <p class="title">Midsemester Examinations</p>
+              <p class="detail">Scheduled to begin <strong>next week</strong></p>
+            </div>
+          </li>
+          <li>
+            <div class="announcement-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="announcement-content">
+              <p class="title">Internship Mentor Meeting</p>
+              <p class="detail">July 10 at <strong>11:00 AM</strong> (Seminar Hall)</p>
+            </div>
+          </li>
+        </ul>
+      </div>
 
+      <!-- Module Preview Cards -->
+      <div class="module-preview vertical">
+        <div class="preview-card">
+          <h3>Attendance Status</h3>
+          <div class="radial-progress" data-label="92%">
+            <svg viewBox="0 0 36 36">
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <path class="circle-bg"
+                    d="M18 2.0845
+                       a 15.9155 15.9155 0 0 1 0 31.831
+                       a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <path class="circle"
+                    stroke-dasharray="92, 100"
+                    d="M18 2.0845
+                       a 15.9155 15.9155 0 0 1 0 31.831
+                       a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+            <div class="radial-label">91.46%</div>
+          </div>
+          <p>You're attending regularly.</p>
+        </div>
 
+        <div class="preview-card">
+          <h3>Project Completion</h3>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 66.67%;">2 / 3</div>
+          </div>
+          <p>Keep up the progress!</p>
+        </div>
+      </div>
+    </div>
 
-  <div class="image-strip">
-    <img src="3.png" alt="Image 3">
-    <img src="4.png" alt="Image 4">
-    <img src="5.png" alt="Image 5">
-    <img src="6.png" alt="Image 6">
-    <img src="7.png" alt="Image 7">
+    <div class="image-strip">
+      <img src="3.png" alt="Campus Life">
+      <img src="4.png" alt="Academic Excellence">
+      <img src="5.png" alt="Research & Innovation">
+      <img src="6.png" alt="Student Activities">
+      <img src="7.png" alt="Global Opportunities">
+    </div>
+
+    <div class="footer-banner">
+      <img src="8.png" alt="Christ University - Excellence and Service">
+    </div>
   </div>
-
-
-
-
-
 
   <script>
     const messages = document.querySelectorAll('.message');
@@ -325,27 +672,34 @@
     }
 
     setInterval(nextMessage, 5000); 
-  </script>
 
-<div class="footer-banner">
-  <img src="8.png" alt="Footer Banner">
-</div>
-<script>
-  function toggleProfile() {
-    const dropdown = document.getElementById("profileDropdown");
-    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-  }
-
-
-  window.addEventListener('click', function(e) {
-    const profile = document.querySelector('.profile-icon');
-    const dropdown = document.getElementById("profileDropdown");
-    if (!profile.contains(e.target)) {
-      dropdown.style.display = 'none';
+    function toggleProfile() {
+      const dropdown = document.getElementById("profileDropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
     }
-  });
-</script>
 
+    function logout() {
+      if (confirm('Are you sure you want to logout?')) {
+        localStorage.removeItem('token');
+        window.location.href = 'index.html';
+      }
+    }
 
+    window.addEventListener('click', function(e) {
+      const profile = document.querySelector('.profile-icon');
+      const dropdown = document.getElementById("profileDropdown");
+      if (!profile.contains(e.target)) {
+        dropdown.style.display = 'none';
+      }
+    });
+
+    // Check authentication on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        window.location.href = 'index.html';
+      }
+    });
+  </script>
 </body>
 </html>

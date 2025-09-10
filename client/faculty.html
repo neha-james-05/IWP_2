@@ -222,7 +222,7 @@
     const tbody = document.querySelector('.faculty-table tbody');
     
     try {
-      const response = await fetch('http://localhost:5000/api/faculty');
+      const response = await fetch('/api/faculty');
       const facultyList = await response.json();
 
       tbody.innerHTML = ''; // Clear existing static rows
