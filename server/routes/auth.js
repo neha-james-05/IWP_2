@@ -33,7 +33,8 @@ router.post('/login', async (req, res) => {
     );
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    // Ensure JSON response so client-side response.json() does not fail
+    res.status(500).json({ msg: 'Server error' });
   }
 });
 

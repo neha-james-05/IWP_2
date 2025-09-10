@@ -1,6 +1,10 @@
 // Global variables
 let currentCaptcha = "";
 let isLoading = false;
+// Determine API base for both served and file:// openings
+const API_BASE = (typeof window !== 'undefined' && window.location && window.location.origin && window.location.origin.startsWith('http'))
+  ? window.location.origin
+  : 'http://localhost:5000';
 
 // Generate captcha function
 function generateCaptcha() {
@@ -126,15 +130,15 @@ document.getElementById('loginForm').addEventListener('submit', async function (
   setLoading(true);
   
   try {
-    const response = await fetch('/api/auth/login', {
+    const response = await fetch(`${API_BASE}/api/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ username, password }),
     });
-
-    const data = await response.json();
+    const contentType = response.headers.get('content-type') || '';
+    const data = contentType.includes('application/json') ? await response.json() : { msg: await response.text() };
 
     if (response.ok) {
       // Login successful
@@ -147,7 +151,8 @@ document.getElementById('loginForm').addEventListener('submit', async function (
       }, 1500);
     } else {
       // Login failed
-      showError(data.msg || 'Invalid credentials. Please try again.');
+      const msg = data.msg || data.error || 'Invalid credentials. Please try again.';
+      showError(`Login failed (${response.status}): ${msg}`);
       generateCaptcha(); // Generate new captcha
       document.getElementById('captchaInput').value = '';
     }
